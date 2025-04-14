@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service("mitier")
 public class MitierrImp implements IMitier{
-   // @Autowired
+    @Autowired
     private Idao dao;
 
-    public MitierrImp(@Qualifier("dao2") Idao dao) {
+    public MitierrImp(@Qualifier("Dao") Idao dao) {
         this.dao = dao;
     }
 

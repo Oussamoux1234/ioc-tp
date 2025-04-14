@@ -1,9 +1,8 @@
 @startuml
-
 title Injection des dépendances et Inversion de contrôle
 
 ' Interfaces
-interface Idao {
+interface IDao {
     + getData() : double
 }
 
@@ -11,33 +10,35 @@ interface IMetier {
     + calcul() : double
 }
 
-' DAO implementations
-class DaoImp {
+' Classes
+class DaoImpl {
+    + DaoImpl()
     + getData() : double
 }
 
-class DaoImpV2 {
+class DaoImplV2 {
+    + DaoImplV2()
     + getData() : double
 }
 
-' Metier implementation
-class MetierImp {
-    - dao : Idao
-    + setDao(dao: Idao) : void
+class MetierImpl {
+    - dao : IDao
+    + MetierImpl(dao : IDao)
+    + setDao(dao : IDao) : void
     + calcul() : double
 }
 
-' Presentation class
-class Presxml {
-    + main(String[] args) : void
+class PresAvecSpringXML {
+    + PresAvecSpringXML()
+    + main(args : String[]) : void
 }
 
 ' Relationships
-Idao <|.. DaoImp
-Idao <|.. DaoImpV2
+IDao <|.. DaoImpl
+IDao <|.. DaoImplV2
 
-IMetier <|.. MetierImp
-MetierImp --> Idao
-Presxml --> MetierImp
+IMetier <|.. MetierImpl
+MetierImpl --> IDao
+PresAvecSpringXML --> IMetier
 
 @enduml
